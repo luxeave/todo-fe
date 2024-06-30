@@ -1,12 +1,14 @@
 // components/TaskList.js
 import React, { useState } from 'react';
 import { useTaskContext } from '../context/TaskContext';
+import { useTheme } from '../context/ThemeContext';
 import TaskCard from './TaskCard';
 import TaskForm from './TaskForm';
 import TaskDetail from './TaskDetail';
 
 const TaskList = () => {
   const { tasks, isLoading, error } = useTaskContext();
+  const { isDarkMode, toggleTheme } = useTheme();
   const [selectedTask, setSelectedTask] = useState(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
 
@@ -15,6 +17,9 @@ const TaskList = () => {
 
   return (
     <div className="task-list">
+      <button onClick={toggleTheme}>
+        {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      </button>
       <button onClick={() => setIsFormOpen(true)}>Create Task</button>
       {tasks.map(task => (
         <TaskCard 
