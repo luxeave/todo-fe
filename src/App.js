@@ -1,17 +1,25 @@
-// App.js
-import React from 'react';
+// src/App.js
+import React, { useState } from 'react';
 import TaskList from './components/TaskList';
+import TaskDetail from './components/TaskDetail';
+import Layout from './components/Layout';
 import { TaskProvider } from './context/TaskContext';
 import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
+  const [selectedTask, setSelectedTask] = useState(null);
+
   return (
     <ThemeProvider>
       <TaskProvider>
-        <div className="App">
-          <h1>To-Do App</h1>
-          <TaskList />
-        </div>
+        <Layout>
+          <TaskList onSelectTask={setSelectedTask} />
+          {selectedTask ? (
+            <TaskDetail task={selectedTask} onClose={() => setSelectedTask(null)} />
+          ) : (
+            <div>Select a task to view details</div>
+          )}
+        </Layout>
       </TaskProvider>
     </ThemeProvider>
   );
