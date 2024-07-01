@@ -15,13 +15,13 @@ const TaskForm = ({ onClose, task = {} }) => {
     status: task.status || 'active'
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Submitting task:', formData); // Log the data being sent
+    console.log('Submitting task:', formData);
     if (task.id) {
-      updateTaskItem(formData);
+      await updateTaskItem(formData);
     } else {
-      addTask(formData);
+      await addTask(formData);
     }
     onClose();
   };

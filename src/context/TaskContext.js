@@ -30,7 +30,7 @@ export const TaskProvider = ({ children }) => {
   const addTask = async (newTask) => {
     try {
       const createdTask = await createTask(newTask);
-      setTasks([...tasks, createdTask]);
+      setTasks(prevTasks => [...prevTasks, createdTask]);
     } catch (err) {
       setError(err.message);
     }

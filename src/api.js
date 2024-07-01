@@ -8,7 +8,7 @@ export const getTasks = async () => {
 };
 
 export const createTask = async (task) => {
-  console.log('Sending task to server:', task); // Log the task being sent
+  console.log('Sending task to server:', task);
   const response = await fetch(`${API_URL}/task`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -19,7 +19,7 @@ export const createTask = async (task) => {
     console.error('Error creating task:', errorText);
     throw new Error(`Failed to create task: ${errorText}`);
   }
-  return response.json();
+  return response.json(); // This should return the created task with its ID
 };
 
 export const updateTask = async (task) => {
